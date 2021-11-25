@@ -1,0 +1,25 @@
+import json
+
+def Main():
+    with open("respuestas.json") as ficheroJSON:       
+        diccionarioRespuestas = json.load(ficheroJSON)
+        with open("registro.txt", "a") as registro:     
+            terminar_conversacion = True
+            valor = ""
+
+            while terminar_conversacion:
+                entrada = input()
+                registro.write(entrada)
+                if entrada in diccionarioRespuestas:         
+                    valor = diccionarioRespuestas[entrada]
+                elif entrada == "adios":
+                    terminar_conversacion =False
+                    valor = "Adios!"
+                else:
+                    valor = "No entiendo que me quieres decir"
+
+                print(valor)
+                registro.write(valor)
+            registro.write("#### Conversacion terminada ####")
+
+Main()
