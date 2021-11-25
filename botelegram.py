@@ -4,8 +4,12 @@ from telegram.ext import (Updater, CommandHandler)
 import random
 
 
+conversacion = False
+
 def inicio(update, context):
     context.bot.send_message(update.message.chat_id, "Oído cocina. Tú dirás...")
+    global conversacion
+    conversacion = True
 
 
 def ods(update, context):
@@ -97,7 +101,9 @@ def ods(update, context):
                  "financiera. Muchos países también requieren de esta asistencia para estimular el crecimiento y el "
                  "intercambio comercial."]
     num_ods = random.randint(1, 17)
-    context.bot.send_message(update.message.chat_id, lista_ods[num_ods])
+    global conversacion
+    if conversacion == True:
+        context.bot.send_message(update.message.chat_id, lista_ods[num_ods])
 
 
 def cita(update, context):
@@ -124,12 +130,16 @@ def cita(update, context):
                    "Un problema se transforma en desafío cuando le pones fecha de solución. (Anónimo)",
                    "El futuro no es lo que va a pasar sino lo que vamos a hacer. (Anónimo)",]
     num_citas = random.randint(1, len(lista_citas))
-    context.bot.send_message(update.message.chat_id, lista_citas[num_citas])
+    global conversacion
+    if conversacion == True:
+        context.bot.send_message(update.message.chat_id, lista_citas[num_citas])
 
 
 def final(update, context):
-    context.bot.send_message(update.message.chat_id, "¡Que pases un buen día amigo!")
-
+    global conversacion
+    if conversacion == True:
+        context.bot.send_message(update.message.chat_id, "¡Que pases un buen día amigo!")
+        conversacion = False
 
 def main():
     TOKEN = "2115182993:AAEIKig-Dxtn5FT1yH7bTLGVMNV8fxZckK4"
