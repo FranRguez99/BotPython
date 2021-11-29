@@ -1,15 +1,13 @@
 import json, re
 
 
-def EscribirRespuesta(respuesta,registro):
-    guardarEnRegistro(respuesta,registro)
+def escribirRespuesta(respuesta, registro):
+    guardarEnRegistro(respuesta, registro)
     print(respuesta)
 
 
-def guardarEnRegistro(texto,registro):
+def guardarEnRegistro(texto, registro):
     registro.write(texto)
-
-
 
 
 def cadpatr(delpatron, delacadena):
@@ -19,9 +17,7 @@ def cadpatr(delpatron, delacadena):
     return delacadena
 
 
-
-
-def Main():
+def botRegexFichero():
     with open("respuestas.json") as ficheroJSON:
         jsonDiccionario = json.load(ficheroJSON)
         with open("registro.txt", "a") as registro:
@@ -33,21 +29,23 @@ def Main():
             while not salir:
                 conoceValor = False
                 datosUsuario = input()
-                guardarEnRegistro(datosUsuario,registro)
-                if datosUsuario == opcionSalir:
-                    salir = True
-                else:
+                guardarEnRegistro(datosUsuario, registro)
+                for opcion in opcionSalir:
+                    if datosUsuario.casefold() == opcion:
+                        salir = True
+                if not salir:
                     for valores in listaValores:
                         regex = re.compile(valores[0], re.IGNORECASE)
                         if re.search(regex, datosUsuario):
                             variable = cadpatr(regex, datosUsuario)
                             respuesta = valores[1].replace("{variable}", variable).replace("?", "")
                             conoceValor = True
-                            EscribirRespuesta(respuesta,registro)
+                            escribirRespuesta(respuesta, registro)
                             break
-                    if conoceValor ==  False:
-                        EscribirRespuesta(noSabeRespuesta,registro)
+                    if not conoceValor:
+                        escribirRespuesta(noSabeRespuesta, registro)
 
-            guardarEnRegistro("#### Conversacion terminada ####",registro)
+            guardarEnRegistro("#### Conversacion terminada ####", registro)
 
-Main()
+
+botRegexFichero()
