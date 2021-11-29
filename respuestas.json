@@ -1,0 +1,11 @@
+{
+	"ListaValores":[
+	["^(Hola)(,?)( *soy )" ,"Muy buenas, {variable}. Soy Botarate"],
+	["([¿]?Te gustan )\\w+|(^[¿]*Has probado )\\w+","Y a quien no, {variable} me fascinan "],
+	["([¿]? *Sabes jugar )\\w+|(^[¿]*Has jugado )\\w+", "Pues si, cuando juego {variable} me divierte mucho"],
+	["([¿]? *Te gustó ir a )\\w+|(^[¿]*Has viajado a )\\w+","Ir a {variable} ha sido una gran experiencia"],
+	["([¿]? *Tu equipo favorito es el )\\w+|(^[¿])\\w+","Ser del {variable} es lo mejor que te puede pasar"]
+	],
+	"noSabeRespuesta":"no se que me dices",
+	"opcionSalir":"Hasta luego"
+}
