@@ -6,6 +6,7 @@ import random
 
 conversacion = False
 
+
 def inicio(update, context):
     context.bot.send_message(update.message.chat_id, "Oído cocina. Tú dirás...")
     global conversacion
@@ -140,6 +141,7 @@ def final(update, context):
     if conversacion == True:
         context.bot.send_message(update.message.chat_id, "¡Que pases un buen día amigo!")
         conversacion = False
+
 
 def main():
     TOKEN = "2115182993:AAEIKig-Dxtn5FT1yH7bTLGVMNV8fxZckK4"
