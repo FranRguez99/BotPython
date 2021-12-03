@@ -3,17 +3,19 @@
 from telegram.ext import (Updater, CommandHandler)
 import random
 
-
+# Variable para indicar si el bot habla o no
 conversacion = False
 
 
 def inicio(update, context):
+    # Inicializa el bot con un mensaje de bienvenida y habilitando la variable de conversación
     context.bot.send_message(update.message.chat_id, "Oído cocina. Tú dirás...")
     global conversacion
     conversacion = True
 
 
 def ods(update, context):
+    # Lista con los objetivos de desarrollo sostenible
     lista_ods = ["Erradicar la pobreza en todas sus formas sigue siendo uno de los principales "
                  "desafíos que enfrenta la humanidad. Si bien la cantidad de personas que viven "
                  "en la extrema pobreza disminuyó en más de la mitad entre 1990 y 2015, aún demasiadas "
@@ -102,12 +104,14 @@ def ods(update, context):
                  "financiera. Muchos países también requieren de esta asistencia para estimular el crecimiento y el "
                  "intercambio comercial."]
     num_ods = random.randint(1, 17)
+    # Comprueba la variable de conversación, devolviendo un ODS si está activa
     global conversacion
-    if conversacion == True:
+    if conversacion:
         context.bot.send_message(update.message.chat_id, lista_ods[num_ods])
 
 
 def cita(update, context):
+    # Lista de citas del aula virtual
     lista_citas = ["Al no ser los únicos, decidimos ser los mejores. (Gorka Lomeña)",
                    "Con demasiada frecuencia damos a los estudiantes respuestas para recordar en lugar de problemas "
                    "para resolver (Roger Lewin)",
@@ -129,21 +133,24 @@ def cita(update, context):
                    "datos y de sus relaciones. (Linus Torvalds)",
                    "La práctica te perfecciona. Descubre cuánta práctica necesitas tú. (Alex Tolón)",
                    "Un problema se transforma en desafío cuando le pones fecha de solución. (Anónimo)",
-                   "El futuro no es lo que va a pasar sino lo que vamos a hacer. (Anónimo)",]
+                   "El futuro no es lo que va a pasar sino lo que vamos a hacer. (Anónimo)"]
     num_citas = random.randint(1, len(lista_citas))
+    # Comprueba la variable de conversación, devolviendo una cita si está activa
     global conversacion
-    if conversacion == True:
+    if conversacion:
         context.bot.send_message(update.message.chat_id, lista_citas[num_citas])
 
 
 def final(update, context):
+    # Comprueba la variable de conversación, si está activa envía un mensaje de despedida y la desactiva
     global conversacion
-    if conversacion == True:
+    if conversacion:
         context.bot.send_message(update.message.chat_id, "¡Que pases un buen día amigo!")
         conversacion = False
 
 
 def main():
+    # Token de nuestro bot generado por 'Bot Father'
     TOKEN = "2115182993:AAEIKig-Dxtn5FT1yH7bTLGVMNV8fxZckK4"
     updater = Updater(TOKEN, use_context=True)
     dp = updater.dispatcher
@@ -158,6 +165,6 @@ def main():
     # Lo deja a la escucha. Evita que se detenga.
     updater.idle()
 
-
+# Función principal
 if __name__ == '__main__':
     main()
